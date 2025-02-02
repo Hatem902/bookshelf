@@ -6,7 +6,7 @@ export const ProfileCard = () => (
   <Card className='w-full p-2.5'>
     <div className='flex items-center space-x-4'>
       <Avatar>
-        <AvatarImage src='/avatars/06.png' alt='User image' />
+        <AvatarImage src='/avatars/04.png' alt='User image' />
         <AvatarFallback>
           {user.username.slice(0, 2).toUpperCase()}
         </AvatarFallback>

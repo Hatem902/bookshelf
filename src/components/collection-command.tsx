@@ -1,7 +1,7 @@
+'use client'
 import React from 'react'
 import {
   Command,
-  CommandEmpty,
   CommandGroup,
   CommandInput,
   CommandItem,
@@ -11,6 +11,8 @@ import {
 import { collections } from '@/mock-data/collections'
 import { Card } from './ui/card'
 import Link from 'next/link'
+import { Library } from 'lucide-react'
+import { useParams } from 'next/navigation'
 
 type CollectionItem = {
   id: number
@@ -24,25 +26,33 @@ type CollectionGroup = {
 
 const collectionGroups: CollectionGroup[] = [
   {
-    name: 'Your Collections',
+    name: 'Your book collections',
     collectionList: collections.map(({ name, id }) => ({ name, id })),
   },
 ]
 
 export const CollectionCommand = () => {
+  const params = useParams<{ id: string }>()
+  const SelectedCollectionId = Number(params.id)
+
   return (
-    <Card className='h-full w-full p-2.5'>
+    <Card className='h-fit w-full p-2.5'>
       <Command>
         <CommandInput placeholder='Search a collection...' />
-        <CommandList>
-          <CommandEmpty>No collections found.</CommandEmpty>
+        <CommandList className='max-h-none'>
           {collectionGroups.map((group, groupIndex) => (
             <React.Fragment key={group.name}>
               <CommandGroup heading={group.name}>
                 {group.collectionList.map((item) => (
-                  <Link href={`/collections/${item.id}`} key={item.id}>
-                    <CommandItem className='cursor-pointer' useHoverStyle>
-                      <p className='truncate'>{item.name}</p>
+                  <Link href={`/collections/${item.id - 1}`} key={item.id}>
+                    <CommandItem
+                      className={`cursor-pointer py-2.5 ${item.id - 1 === SelectedCollectionId && 'bg-accent'}`}
+                      useHoverStyle
+                    >
+                      <p className='flex items-center truncate'>
+                        <Library className='mr-2 h-2 w-2 text-muted-foreground' />
+                        {item.name}
+                      </p>
                     </CommandItem>
                   </Link>
                 ))}

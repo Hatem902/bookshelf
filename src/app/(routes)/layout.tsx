@@ -27,7 +27,7 @@ export default function RootLayout({
     // suppressHydrationWarning is what's recommended by Next.js until they release a proper solution to their theme provider
     <html lang='en' suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased flex w-full justify-center`}
+        className={`${geistSans.variable} ${geistMono.variable} flex h-screen w-full justify-center antialiased`}
       >
         <ThemeProvider
           attribute='class'
