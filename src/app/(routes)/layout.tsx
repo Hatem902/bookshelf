@@ -14,8 +14,9 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'Library App',
-  description: 'Library App',
+  title: 'Bookshelf',
+  description:
+    'Easily organize, track, and explore your personal book collections with Bookshelf.',
 }
 
 export default function RootLayout({
