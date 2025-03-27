@@ -1,14 +1,32 @@
-# Bookshelf
+# Front-end Web App : Bookshelf
 
-I built this app to experiment with the new Next.js 15 and React 19. It's a library app that helps organize and filter your books using collections, book states (read, unread, reading), reviews, and more.
+## Tech
 
-To run locally :
+- React 19
+- Next.js 15
 
-```bash
+## Pour lancer localement :
+
+1. **Exécuter l'API backend**  
+   Commencez par exécuter l'API backend localement en suivant les instructions du fichier README du Repo backend :  
+   [Backend Repository](https://github.com/khalil-trabelsi/gestionbibliotheque.git)
+
+---
+
+2. **Lancer l'application front-end 'Bookshelf'**
+
+   ```sh
    git clone https://github.com/your-username/bookshelf.git
    cd bookshelf
    npm install --legacy-peer-deps
    npm run dev
-```
+   ```
 
-Since many packages haven't yet listed the new React 19 as a peer dependency, you should use `npm install --legacy-peer-deps` instead of `npm install` to install the project dependencies.
+   **NB** : Comme de nombreux packages n'ont pas encore listé React 19 comme dépendance peer, vous devez utiliser `npm install --legacy-peer-deps` au lieu de `npm install` pour installer les dépendances du projet.
+
+---
+
+3. **Accéder à l'application**
+   Naviguez ensuite vers http://localhost:3000/ et vous serez redirigé vers la page d'inscription car vous n'êtes pas encore connecté.
+
+**NB**: Voir le reste dans la section Front-end Web App : Bookshelf, du rapport, avec des captures d'écran.
