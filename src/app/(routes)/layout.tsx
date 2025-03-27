@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from '@/components/theme-provider'
+import { ReactQueryProvider } from './client-providers'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -25,7 +26,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    // suppressHydrationWarning is what's recommended by Next.js until they release a proper solution to their theme provider
+    /* suppressHydrationWarning is what's recommended by Next.js until they release a proper solution to their theme provider */
     <html lang='en' suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} flex h-screen w-full justify-center antialiased`}
@@ -36,7 +37,11 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <ReactQueryProvider>
+            <div className='flex h-screen w-full justify-center'>
+              {children}
+            </div>
+          </ReactQueryProvider>
         </ThemeProvider>
       </body>
     </html>

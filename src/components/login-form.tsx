@@ -1,3 +1,4 @@
+'use client'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import {
@@ -9,29 +10,42 @@ import {
 } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { useLoginMutation } from '@/hooks/queries/auth'
+import { SubmitHandler, useForm } from 'react-hook-form'
 
 export function LoginForm({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<'div'>) {
+  const { mutate, error } = useLoginMutation()
+  const { register, handleSubmit } = useForm({
+    defaultValues: {
+      username: '',
+      password: '',
+    },
+  })
+  const onSubmit: SubmitHandler<LoginCredentials> = (data) => {
+    mutate(data)
+  }
   return (
     <div className={cn('flex flex-col gap-6', className)} {...props}>
       <Card>
         <CardHeader>
           <CardTitle className='text-2xl'>Login</CardTitle>
           <CardDescription>
-            Enter your email below to login to your account
+            Enter your username below to login to your account
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <div className='flex flex-col gap-6'>
               <div className='grid gap-2'>
-                <Label htmlFor='email'>Email</Label>
+                <Label htmlFor='username'>Username</Label>
                 <Input
-                  id='email'
-                  type='email'
-                  placeholder='m@example.com'
+                  id='username'
+                  type='username'
+                  {...register('username')}
+                  placeholder='bklover123'
                   required
                 />
               </div>
@@ -39,8 +53,18 @@ export function LoginForm({
                 <div className='flex items-center'>
                   <Label htmlFor='password'>Password</Label>
                 </div>
-                <Input id='password' type='password' required />
+                <Input
+                  id='password'
+                  type='password'
+                  {...register('password')}
+                  required
+                />
               </div>
+              {error ? (
+                <div className='mt-4 text-center text-sm font-semibold text-destructive'>
+                  Wrong credentials combination.
+                </div>
+              ) : null}
               <Button type='submit' className='w-full'>
                 Login
               </Button>
